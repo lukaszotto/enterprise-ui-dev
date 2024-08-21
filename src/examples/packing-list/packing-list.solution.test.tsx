@@ -1,5 +1,11 @@
-import { render, screen } from 'test/utilities';
-import PackingList from '.';
+import { render as _render, screen } from 'test/utilities';
+import { PackingList } from '.';
+import { Provider } from 'react-redux';
+import { createStore } from './store';
+
+const render = (ui: React.ReactElement) => {
+  return _render(<Provider store={createStore()}>{ui}</Provider>);
+};
 
 it('renders the Packing List application', () => {
   render(<PackingList />);

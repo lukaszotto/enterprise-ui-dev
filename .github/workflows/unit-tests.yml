@@ -35,12 +35,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/upload-artifact@v3
       - name: Run Test coverage
-        uses: actions/setup-node@v3
+        uses: ./.github/actions/checkout-and-setup
+      - run: npm test -- --coverage
+      - uses: actions/upload-artifact@v3
+        name: Archive coverage report
         with:
           name: coverage-report
-          node-version: 18
-          cache: 'npm'
-      - run: npm ci
-      - run: npm test -- --coverage
+          path: coverage
